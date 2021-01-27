@@ -1,0 +1,42 @@
+on: [push]
+name: Deploy QA
+
+jobs:
+  build-and-deploy-server:
+    runs-on: ubuntu-latest
+    steps:
+      # checkout the repo
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@main
+
+      - name: 'Login via Azure CLI'
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: 'Build and push image'
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v1
+        with:
+          envkey_DATABASE_URI: ${{ secrets.DATABASE_URI }}
+          envkey_DATABASE_SSL: "true"
+          file_name: .env
+
+      - run: |
+          docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/crowstrapiqa:${{ github.sha }}
+          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/crowstrapiqa:${{ github.sha }}
+
+      - uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'crow-strapi-qa'
+          images: ${{ secrets.REGISTRY_LOGIN_SERVER }}/crowstrapiqa:${{ github.sha }}
+
+      - name: Azure logout
+        run: |
+          az logout

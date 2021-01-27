@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "wish_lists",
+  "info": {
+    "name": "wishList",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "unique": false
+    },
+    "description": {
+      "type": "text"
+    },
+    "user": {
+      "via": "wish_lists",
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "products": {
+      "collection": "product",
+      "via": "wish_lists",
+      "dominant": true
+    },
+    "active_deleted": {
+      "type": "component",
+      "repeatable": false,
+      "component": "metadata.active-and-deleted",
+      "required": true
+    }
+  }
+}

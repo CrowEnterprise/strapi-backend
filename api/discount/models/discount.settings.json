@@ -1,0 +1,51 @@
+{
+  "kind": "collectionType",
+  "collectionName": "discounts",
+  "info": {
+    "name": "discount",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "Fixed",
+        "Percent"
+      ],
+      "required": true
+    },
+    "amount": {
+      "type": "decimal",
+      "required": true
+    },
+    "code": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "active_deleted": {
+      "type": "component",
+      "repeatable": false,
+      "component": "metadata.active-and-deleted",
+      "required": true
+    },
+    "products": {
+      "collection": "product",
+      "via": "discount"
+    },
+    "owner": {
+      "plugin": "admin",
+      "model": "user"
+    }
+  }
+}

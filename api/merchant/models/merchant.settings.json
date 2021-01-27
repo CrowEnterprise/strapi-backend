@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "merchants",
+  "info": {
+    "name": "merchant",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "about": {
+      "type": "richtext"
+    },
+    "products": {
+      "via": "merchant",
+      "collection": "product"
+    },
+    "addresses": {
+      "type": "component",
+      "repeatable": true,
+      "component": "metadata.address"
+    },
+    "active_deleted": {
+      "type": "component",
+      "repeatable": false,
+      "component": "metadata.active-and-deleted",
+      "required": true
+    }
+  }
+}

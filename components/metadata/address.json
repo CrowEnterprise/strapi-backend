@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_metadata_addresses",
+  "info": {
+    "name": "Address",
+    "icon": "address-book",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "lineOne": {
+      "type": "string"
+    },
+    "lineTwo": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string"
+    },
+    "zip": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    }
+  }
+}

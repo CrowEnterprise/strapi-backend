@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_memberships",
+  "info": {
+    "name": "UserMembership",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "user": {
+      "via": "user_membership",
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "startDate": {
+      "type": "datetime"
+    },
+    "term": {
+      "type": "integer"
+    },
+    "pricePerTerm": {
+      "type": "decimal"
+    },
+    "active_deleted": {
+      "type": "component",
+      "repeatable": false,
+      "component": "metadata.active-and-deleted",
+      "required": true
+    },
+    "membership": {
+      "model": "membership",
+      "via": "user_memberships"
+    }
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "kind": "collectionType",
+  "collectionName": "products",
+  "info": {
+    "name": "product",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "cost": {
+      "type": "decimal",
+      "required": false
+    },
+    "quantityAvailable": {
+      "type": "integer",
+      "required": true
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "Normal",
+        "NativeAmerican"
+      ],
+      "default": "Normal",
+      "required": true
+    },
+    "merchant": {
+      "model": "merchant",
+      "via": "products"
+    },
+    "averageRating": {
+      "type": "decimal"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "InStock",
+        "LowStock",
+        "OutOfStock"
+      ],
+      "default": "InStock",
+      "required": true
+    },
+    "dates": {
+      "type": "component",
+      "repeatable": false,
+      "component": "metadata.dates"
+    },
+    "active_deleted": {
+      "type": "component",
+      "repeatable": false,
+      "component": "metadata.active-and-deleted",
+      "required": true
+    },
+    "photos": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "reviews": {
+      "via": "product",
+      "collection": "review"
+    },
+    "department": {
+      "via": "products",
+      "model": "department"
+    },
+    "discount": {
+      "via": "products",
+      "model": "discount"
+    },
+    "wish_lists": {
+      "via": "products",
+      "collection": "wish-list"
+    },
+    "orders": {
+      "via": "products",
+      "collection": "order"
+    },
+    "cart_products": {
+      "via": "product",
+      "collection": "cart-product"
+    },
+    "sku": {
+      "type": "string"
+    },
+    "partNumber": {
+      "type": "string"
+    },
+    "shipping": {
+      "type": "decimal"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_metadata_dates",
+  "info": {
+    "name": "dates",
+    "icon": "calendar-alt"
+  },
+  "options": {},
+  "attributes": {
+    "dateCreated": {
+      "type": "datetime"
+    },
+    "dateUpdated": {
+      "type": "datetime"
+    }
+  }
+}

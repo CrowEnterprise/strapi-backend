@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "memberships",
+  "info": {
+    "name": "Membership",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "pricePerMonth": {
+      "type": "decimal"
+    },
+    "pricePerYear": {
+      "type": "decimal"
+    },
+    "active_deleted": {
+      "type": "component",
+      "repeatable": false,
+      "component": "metadata.active-and-deleted",
+      "required": true
+    },
+    "user_memberships": {
+      "via": "membership",
+      "collection": "visitor-membership"
+    }
+  }
+}
